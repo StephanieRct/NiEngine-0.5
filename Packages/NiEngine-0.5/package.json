@@ -1,0 +1,32 @@
+{
+  "name": "niengine",
+  "displayName": "NiEngine",
+  "version": "0.5.0",
+  "unity": "2021.3",
+  "unityRelease": "15f1",
+  "dependencies": {
+    "com.unity.burst": "1.6.6",
+    "com.unity.properties": "1.7.0-preview",
+    "com.unity.properties.ui": "1.7.0-preview",
+    "com.unity.serialization": "1.7.0-preview.1",
+    "com.unity.collections": "1.4.0",
+    "com.unity.jobs": "0.70.0-preview.7",
+    "com.unity.mathematics": "1.2.6",
+    "com.unity.modules.assetbundle": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.test-framework.performance": "2.8.0-preview",
+    "com.unity.nuget.mono-cecil": "1.10.1",
+    "com.unity.scriptablebuildpipeline": "1.19.2",
+    "com.unity.platforms": "0.51.1-preview.21",
+    "com.unity.roslyn": "0.2.2-preview",
+    "com.unity.profiling.core": "1.0.0",
+    "com.unity.entities": "0.51.1-preview.21",
+    "com.unity.inputsystem": "1.4.4"
+  },
+  "description": "NiEngine",
+  "keywords": [
+    "niengine",
+    "dots",
+    "entities"
+  ]
+}
