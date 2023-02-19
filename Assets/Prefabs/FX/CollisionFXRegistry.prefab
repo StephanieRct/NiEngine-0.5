@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7c219ace30472408f2de9d54b6e900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinimumVelocity: 3
+  MinimumVelocity: 1
   MaximumVelocity: 10
   VelocityToVolumeCurve:
     serializedVersion: 2
@@ -81,3 +81,6 @@ MonoBehaviour:
   - MaterialA: Wood
     MaterialB: Concrete
     Sound: {fileID: 5631642211020294374, guid: f67796f16484b0e4d81af5e818f82365, type: 3}
+  - MaterialA: Key
+    MaterialB: Concrete
+    Sound: {fileID: 3049059066679667285, guid: 20853dfb43de91645949a84547a4e0b0, type: 3}

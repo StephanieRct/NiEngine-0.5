@@ -6,6 +6,14 @@ using System.Linq;
 
 namespace Nie
 {
+    [System.Serializable]
+    public struct AnimatorStateReference
+    {
+        public Animator Animator;
+        public string State;
+        public int StateHash;
+    }
+
     /// <summary>
     /// A reactive object will trigger a reaction when it collide with a matching ReactiveObject
     /// </summary>
@@ -40,6 +48,8 @@ namespace Nie
         public bool ReactToCollision = true;
         public bool ReactToTrigger = true;
 
+        public AnimatorStateReference MustBeInAnimatorState;
+
         [Header("Reaction:")]
 
         [Tooltip("When reaction is activated, destroy this GameObject")]
@@ -53,6 +63,11 @@ namespace Nie
 
         [Tooltip("If set, move the other ReactiveObject's transform to the provided Transform.")]
         public Transform MoveOtherAt;
+
+        [Tooltip("Will release this object if it has a Grabbable component and is currently grabbed")]
+        public bool ReleaseGrabbed;
+
+        public AnimatorStateReference PlayAnimatorState;
 
         [Header("Debug:")]
         [Tooltip("Print to console events caused by this ReactiveObject")]
@@ -112,6 +127,7 @@ namespace Nie
 
         public void React(Reaction reaction)
         {
+            
             if (DebugLog)
                 Debug.Log($"[{Time.frameCount}] ReactiveObject '{ThisReactionName}' reacts to '{reaction.Other.ThisReactionName}'");
 
@@ -128,6 +144,11 @@ namespace Nie
                 Instantiate(SpawnAtCollision, reaction.Position, Quaternion.identity);
             }
 
+            if (ReleaseGrabbed && TryGetComponent<Grabbable>(out var grabbable2))
+                grabbable2.ReleaseIfGrabbed();
+            if(PlayAnimatorState.Animator != null)
+                PlayAnimatorState.Animator.Play(PlayAnimatorState.StateHash);
+            OnReact?.Invoke(this, reaction.Other);
 
 #if REACTIVEOBJECTEXT
             OnTouchBegin?.Invoke(this, reaction.Other);
@@ -155,6 +176,9 @@ namespace Nie
             if (SingleAtOnce && m_CurrentSingleReaction != null) return false;
             if (other.SingleAtOnce && other.m_CurrentSingleReaction != null && other.m_CurrentSingleReaction != this) return false;
             if (other.ThisReactionName != OtherReactionName || other.OtherReactionName != ThisReactionName) return false;
+            if (MustBeInAnimatorState.Animator != null)
+                if (MustBeInAnimatorState.Animator.GetCurrentAnimatorStateInfo(0).shortNameHash != MustBeInAnimatorState.StateHash)
+                    return false;
             if (SingleAtOnce) m_CurrentSingleReaction = other;
             return true;
         }

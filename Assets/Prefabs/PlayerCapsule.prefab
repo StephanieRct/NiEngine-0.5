@@ -141,6 +141,7 @@ MonoBehaviour:
   ChangedGrabbedObjectLayer: 1
   GrabbedObjectLayer:
     m_LayerIndex: 8
+  DebugLog: 0
 --- !u!1 &1115138353065729144
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115138353902406338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.0770004}
+  m_LocalPosition: {x: 0, y: 0, z: 0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -269,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a6cb4a91e361746aa7f34076126b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 4
+  Distance: 1
   ScrollSpeed: -0.3
 --- !u!1 &1115138355025434049
 GameObject:
@@ -512,7 +513,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8713720139384311909}
-  m_LocalRotation: {x: -0, y: 0.9405569, z: -0, w: 0.33963636}
+  m_LocalRotation: {x: 0, y: 0.9405582, z: 0, w: 0.3396328}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
