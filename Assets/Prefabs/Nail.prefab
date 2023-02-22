@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2698180726602966822}
   - component: {fileID: 8630913975126639323}
   - component: {fileID: 959858537127435354}
+  - component: {fileID: -7553388601490583485}
   m_Layer: 0
   m_Name: Nail
   m_TagString: Untagged
@@ -82,15 +83,27 @@ MonoBehaviour:
   MustTouchDuringDelay: 1
   ReactionCooldown: 0.5
   SingleAtOnce: 0
+  ObjectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   ReactToCollision: 1
   ReactToTrigger: 1
+  MustBeInAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  Reactions:
+  - {fileID: -7553388601490583485}
   DestroyGameObject: 1
   ReplaceWith: {fileID: 0}
   SpawnAtCollision: {fileID: 847858133201606599, guid: f67796f16484b0e4d81af5e818f82365,
     type: 3}
   MoveOtherAt: {fileID: 0}
-  Sound: {fileID: 0}
-  SoundPitchVariance: 0
+  ReleaseGrabbed: 0
+  PlayAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
   DebugLog: 0
   OnReact:
     m_PersistentCalls:
@@ -102,6 +115,36 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnTouching:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-7553388601490583485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336636909495383820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7f8dd5ac745c2489f7b000d0b444f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactionCooldown: 0
+  DestroyGameObject: 1
+  ReplaceWith: {fileID: 0}
+  Spawn: {fileID: 847858133201606599, guid: f67796f16484b0e4d81af5e818f82365, type: 3}
+  DefaultReactionPosition: {fileID: 0}
+  MoveTriggeringObjectAt: {fileID: 0}
+  ReleaseGrabbed: 0
+  PlayAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  DebugLog: 0
+  OnReact:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCooldownOver:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5352146883925037234

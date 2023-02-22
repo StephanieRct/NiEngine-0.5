@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1447039182}
   - component: {fileID: 1447039181}
   - component: {fileID: 1447039180}
+  - component: {fileID: 205486696}
   m_Layer: 0
   m_Name: ClawReactions
   m_TagString: Untagged
@@ -78,13 +79,27 @@ MonoBehaviour:
   MustTouchDuringDelay: 0
   ReactionCooldown: 1
   SingleAtOnce: 1
+  ObjectLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   ReactToCollision: 0
   ReactToTrigger: 1
+  MustBeInAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  Reactions:
+  - {fileID: 205486696}
   DestroyGameObject: 0
   ReplaceWith: {fileID: 0}
   SpawnAtCollision: {fileID: 5494003422872149718, guid: a597275f8ab627b4ca959a9a59c71e89,
     type: 3}
   MoveOtherAt: {fileID: 0}
+  ReleaseGrabbed: 0
+  PlayAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
   DebugLog: 0
   OnReact:
     m_PersistentCalls:
@@ -96,6 +111,36 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnTouching:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &205486696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447039178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7f8dd5ac745c2489f7b000d0b444f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactionCooldown: 0
+  DestroyGameObject: 0
+  ReplaceWith: {fileID: 0}
+  Spawn: {fileID: 5494003422872149718, guid: a597275f8ab627b4ca959a9a59c71e89, type: 3}
+  DefaultReactionPosition: {fileID: 0}
+  MoveTriggeringObjectAt: {fileID: 0}
+  ReleaseGrabbed: 0
+  PlayAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  DebugLog: 0
+  OnReact:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCooldownOver:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1921772493714459742
@@ -371,10 +416,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8295884aae8074287418bd28efe243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugLog: 0
   OnGrab:
     m_PersistentCalls:
       m_Calls: []
   OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnfocus:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &445084925

@@ -129,10 +129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8295884aae8074287418bd28efe243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugLog: 0
   OnGrab:
     m_PersistentCalls:
       m_Calls: []
   OnRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnfocus:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &6386916196687485442
@@ -147,11 +154,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a25e19b34a0634ebd1f291f3aaaad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisItemName: Cube
-  OtherItemName: Capsule
+  ThisReactionName: 
+  OtherReactionName: 
+  ReactionDelay: 0
+  MustTouchDuringDelay: 0
+  ReactionCooldown: 0
+  SingleAtOnce: 0
+  ReactToCollision: 1
+  ReactToTrigger: 1
+  MustBeInAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  Reaction: {fileID: 0}
+  DestroyGameObject: 0
   ReplaceWith: {fileID: 0}
   SpawnAtCollision: {fileID: 0}
-  Sound: {fileID: 6386916197736139292}
+  MoveOtherAt: {fileID: 0}
+  ReleaseGrabbed: 0
+  PlayAnimatorState:
+    Animator: {fileID: 0}
+    State: 
+    StateHash: 0
+  DebugLog: 0
+  OnReact:
+    m_PersistentCalls:
+      m_Calls: []
   OnTouchBegin:
     m_PersistentCalls:
       m_Calls: []
@@ -186,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6386916197736139295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.45, y: -0.7099999, z: -2.8286858}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

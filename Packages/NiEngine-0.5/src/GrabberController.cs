@@ -52,6 +52,8 @@ namespace Nie
         // Relative position where the currently grabbed grabbable was grabbed
         Vector3 m_GrabbedPosition;
 
+        Grabbable m_Focus = null;
+
         void Update()
         {
             // TODO tie this into the input system
@@ -63,21 +65,25 @@ namespace Nie
             {
                 ReleaseGrabbed();
             }
-            if (!m_IsGrabbing && Hand != null)
-            {
-                var rendererHand = Hand.GetComponent<MeshRenderer>();
-                var rendererGrabPosition = GrabPosition.GetComponent<MeshRenderer>();
-                if (rendererHand != null) rendererHand.enabled = false;
-                if (rendererGrabPosition != null) rendererGrabPosition.enabled = true;
 
+            if (!m_IsGrabbing)
+            {
                 var ray = new Ray(transform.position, (GrabPosition.position - transform.position).normalized);
-                if (Physics.Raycast(ray, out var hit) && hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<Grabbable>(out var grabbable))
+                if (Physics.Raycast(ray, out var hit) && hit.rigidbody != null && !hit.rigidbody.isKinematic && hit.rigidbody.gameObject.TryGetComponent<Grabbable>(out var grabbable) && grabbable.CanGrab(this, hit.point))
                 {
-                    Hand.transform.position = hit.point;
-                    if (rendererHand != null) rendererHand.enabled = true;
-                    if (rendererGrabPosition != null) rendererGrabPosition.enabled = false;
-                }
+                    ShowHand(hit.point);
+                    if (m_Focus != grabbable)
+                        Focus(grabbable);
+                } else
+                    Unfocus();
             }
+            else
+                Unfocus();
+
+            // Release grabbed grabbable is can no longer grab it.
+            if(GrabbedGrabbable != null && !GrabbedGrabbable.CanGrab(this, GrabPosition.position))
+                ReleaseGrabbed();
+
             // Move the currently grabbed grabbable
             if (GrabbedGrabbable != null)
             {
@@ -92,24 +98,36 @@ namespace Nie
                 // grabbed object was destroyed
                 m_IsGrabbing = false;
                 if(DebugLog)
-                    Debug.Log($"'{name}' Release destroyed object");
+                    Debug.Log($"[{Time.frameCount}] GrabberController '{name}' Release destroyed object");
             }
         }
 
+        void HideHand()
+        {
+            if (Hand != null && Hand.TryGetComponent<MeshRenderer>(out var rendererHand))
+                rendererHand.enabled = false;
+            if (GrabPosition.TryGetComponent<MeshRenderer>(out var rendererGrabPosition))
+                rendererGrabPosition.enabled = true;
+        }
+        void ShowHand(Vector3 position)
+        {
+            if (Hand != null)
+            {
+                Hand.transform.position = position;
+                if (Hand.TryGetComponent<MeshRenderer>(out var rendererHand))
+                    rendererHand.enabled = true;
+            }
+            if (GrabPosition.TryGetComponent<MeshRenderer>(out var rendererGrabPosition))
+                rendererGrabPosition.enabled = false;
+        }
         /// <summary>
         /// Will try to grab the first grabbable in front of the controller using a ray-cast
         /// </summary>
         public void TryGrabInFront()
         {
             var ray = new Ray(transform.position, (GrabPosition.position - transform.position).normalized);
-            if (Physics.Raycast(ray, out var hit))
-            {
-                if (hit.rigidbody != null && !hit.rigidbody.isKinematic && hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<Grabbable>(out var grabbable))
-                {
-                    Grab(grabbable, hit.point);
-                }
-            }
-
+            if (Physics.Raycast(ray, out var hit) && hit.rigidbody != null && !hit.rigidbody.isKinematic && hit.rigidbody.gameObject.TryGetComponent<Grabbable>(out var grabbable) && grabbable.CanGrab(this, hit.point))
+                Grab(grabbable, hit.point);
         }
         public void SetGameObjectLayer(GameObject obj, int layer)
         {
@@ -126,6 +144,10 @@ namespace Nie
         {
 
             ReleaseGrabbed();
+
+            if (DebugLog)
+                Debug.Log($"[{Time.frameCount}] GrabberController '{name}' grab '{grabbable.name}'");
+
             m_IsGrabbing = true;
 
             if (Hand != null && Hand.TryGetComponent<MeshRenderer>(out var mr))
@@ -146,8 +168,6 @@ namespace Nie
             m_GrabbedPosition = grabbable.transform.InverseTransformPoint(grabPosition);
             grabbable.GrabBy(this);
 
-            if (DebugLog)
-                Debug.Log($"'{name}' grabbed '{GrabbedGrabbable.name}'");
         }
 
         /// <summary>
@@ -158,7 +178,7 @@ namespace Nie
             if (GrabbedGrabbable == null) return;
 
             if (DebugLog) 
-                Debug.Log($"'{name}' Release '{GrabbedGrabbable.name}'");
+                Debug.Log($"[{Time.frameCount}] GrabberController '{name}' Release '{GrabbedGrabbable.name}'");
 
             m_IsGrabbing = false;
 
@@ -171,6 +191,24 @@ namespace Nie
             GrabbedGrabbable.ReleaseBy(this);
             GrabbedGrabbable = null;
             GrabbedRigidbody = null;
+        }
+
+        public void Focus(Grabbable grabbable)
+        {
+            Unfocus();
+            if (DebugLog)
+                Debug.Log($"[{Time.frameCount}] GrabberController '{name}' Focus Grabbable '{grabbable.name}'");
+            m_Focus = grabbable;
+            m_Focus.Focus(this);
+        }
+        public void Unfocus()
+        {
+            if (m_Focus == null) return;
+            if(DebugLog)
+                Debug.Log($"[{Time.frameCount}] GrabberController '{name}' Unfocus Grabbable '{m_Focus.name}'");
+            m_Focus.Unfocus(this);
+            m_Focus = null;
+            HideHand();
         }
     }
 

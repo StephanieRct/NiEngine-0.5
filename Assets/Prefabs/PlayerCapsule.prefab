@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1115138353049828955}
   - component: {fileID: 1115138353049828952}
   - component: {fileID: 1115138353049828957}
+  - component: {fileID: 2076133964}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -141,6 +142,21 @@ MonoBehaviour:
   ChangedGrabbedObjectLayer: 1
   GrabbedObjectLayer:
     m_LayerIndex: 8
+  DebugLog: 0
+--- !u!114 &2076133964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115138353049829286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50532f32ce52994a813d1bac256a1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TouchPositionObject: {fileID: 1115138353065729147}
+  Hand: {fileID: 1115138355025434049}
   DebugLog: 0
 --- !u!1 &1115138353065729144
 GameObject:

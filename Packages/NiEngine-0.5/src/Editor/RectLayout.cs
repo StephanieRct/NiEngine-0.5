@@ -104,11 +104,9 @@ namespace Nie.Editor
         public void PrefixLabel(GUIContent label)
         {
             var size = GUI.skin.box.CalcSize(label);
-            Debug.Log($"size={size}");
             var r = EditorGUI.PrefixLabel(Acquire(size.x, size.y), label);
             FreeRect.xMin = r.xMin;
             OriginalRect = FreeRect;
-            Debug.Log($"FreeRect={FreeRect}");
         }
     }
 

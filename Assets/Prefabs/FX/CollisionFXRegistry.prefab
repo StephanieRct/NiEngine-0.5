@@ -44,20 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7c219ace30472408f2de9d54b6e900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinimumVelocity: 1
-  MaximumVelocity: 10
+  MinimumVelocity: 0
+  MaximumVelocity: 5
   VelocityToVolumeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: -0.004166667
+      value: 0.007075472
+      inSlope: 2.6886792
+      outSlope: 2.6886792
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.016597511
     - serializedVersion: 3
       time: 1
       value: 1
@@ -84,3 +84,12 @@ MonoBehaviour:
   - MaterialA: Key
     MaterialB: Concrete
     Sound: {fileID: 3049059066679667285, guid: 20853dfb43de91645949a84547a4e0b0, type: 3}
+  - MaterialA: Key
+    MaterialB: Metal
+    Sound: {fileID: 3049059066679667285, guid: 20853dfb43de91645949a84547a4e0b0, type: 3}
+  - MaterialA: Key
+    MaterialB: Wood
+    Sound: {fileID: 3049059066679667285, guid: 20853dfb43de91645949a84547a4e0b0, type: 3}
+  - MaterialA: Metal
+    MaterialB: Metal
+    Sound: {fileID: 2230316527809889002, guid: a597275f8ab627b4ca959a9a59c71e89, type: 3}
