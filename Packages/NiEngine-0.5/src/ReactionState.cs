@@ -66,6 +66,7 @@ namespace Nie
         bool TryReact(GameObject triggeringObject, Vector3 position);
         void React(GameObject triggeringObject, Vector3 position);
     }
+    [AddComponentMenu("Nie/Object/ReactionState")]
     public class ReactionState : MonoBehaviour, IReaction
     {
         [Tooltip("Name of this state. Used when activating state.")]

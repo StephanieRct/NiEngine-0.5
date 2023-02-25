@@ -26,10 +26,16 @@ namespace Nie
     public class CollisionFXRegistry : MonoBehaviour
     {
         [Tooltip("Volume is 0 if the collision relative velocity magnitude is less or equal to this value")]
-        public float MinimumVelocity = 3f;
+        public float LowVolumeVelocity = 1f;
 
         [Tooltip("Volume is 1 if the collision relative velocity magnitude is greater or equal to this value")]
-        public float MaximumVelocity = 10f;
+        public float HighVolumeVelocity = 10f;
+
+        [Tooltip("Do not react if velocity if lower than this")]
+        public float MinimumVelocity = 0f;
+
+        [Tooltip("Do not react if velocity if higher than this")]
+        public float MaximumVelocity = 99999f;
 
         [Tooltip("Curve between Minimum Velocity and Maximum Velocity. Can be null.")]
         public AnimationCurve VelocityToVolumeCurve;
@@ -48,10 +54,13 @@ namespace Nie
 
         public float ComputeVolume(float relativeVelocity)
         {
-            var ratio = math.saturate((relativeVelocity - MinimumVelocity) / (MaximumVelocity - MinimumVelocity));
+            var ratio = math.saturate((relativeVelocity - LowVolumeVelocity) / (HighVolumeVelocity - LowVolumeVelocity));
             if (VelocityToVolumeCurve != null)
                 return VelocityToVolumeCurve.Evaluate(ratio);
             return ratio;
         }
+
+        public bool CanReactVelocity(float relativeVelocity) 
+            => relativeVelocity >= LowVolumeVelocity && relativeVelocity >= MinimumVelocity && relativeVelocity <= MaximumVelocity;
     }
 }

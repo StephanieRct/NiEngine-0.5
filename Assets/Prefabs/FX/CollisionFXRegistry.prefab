@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7c219ace30472408f2de9d54b6e900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LowVolumeVelocity: 1
+  HighVolumeVelocity: 10
   MinimumVelocity: 0
-  MaximumVelocity: 5
+  MaximumVelocity: 9999
   VelocityToVolumeCurve:
     serializedVersion: 2
     m_Curve:

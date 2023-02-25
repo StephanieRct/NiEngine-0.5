@@ -50,22 +50,6 @@ namespace Nie
         public List<Reaction> Reactions;
         public List<ReactionStateReference> ReactionStates;
 
-        //[Tooltip("When reaction is activated, destroy this GameObject")]
-        //public bool DestroyGameObject;
-
-        //[Tooltip("If Destroy is checked, instantiate the provided GameObject in its place, with the same transform.")]
-        //public GameObject ReplaceWith;
-
-        //[Tooltip("If set, instantiate the provided GameObject at the collision point")]
-        //public GameObject SpawnAtCollision;
-
-        //[Tooltip("If set, move the other ReactOnCollisionPair's transform to the provided Transform.")]
-        //public Transform MoveOtherAt;
-
-        //[Tooltip("Will release this object if it has a Grabbable component and is currently grabbed")]
-        //public bool ReleaseGrabbed;
-
-        //public AnimatorStateReference PlayAnimatorState;
 
         [Header("Debug:")]
         [Tooltip("Print to console events caused by this ReactOnCollisionPair")]
@@ -142,39 +126,6 @@ namespace Nie
 #if NIE_EXTRAEVENT
             OnReact?.Invoke(this, delayedReaction.Other);
 #endif
-
-            //if (MoveOtherAt != null)
-            //{
-            //    delayedReaction.Other.transform.position = MoveOtherAt.transform.position;
-            //    delayedReaction.Other.transform.rotation = MoveOtherAt.transform.rotation;
-            //    if (delayedReaction.Other.TryGetComponent<Grabbable>(out var grabbable))
-            //        grabbable.ReleaseIfGrabbed();
-            //}
-
-            //if (SpawnAtCollision != null)
-            //{
-            //    Instantiate(SpawnAtCollision, delayedReaction.Position, Quaternion.identity);
-            //}
-
-            //if (ReleaseGrabbed && TryGetComponent<Grabbable>(out var grabbable2))
-            //    grabbable2.ReleaseIfGrabbed();
-            //if(PlayAnimatorState.Animator != null)
-            //    PlayAnimatorState.Animator.Play(PlayAnimatorState.StateHash);
-            //OnReact?.Invoke(this, delayedReaction.Other);
-
-            //if (DestroyGameObject)
-            //{
-            //    var pos = transform.position;
-            //    var rot = transform.rotation;
-            //    Destroy(gameObject);
-            //    if (ReplaceWith != null)
-            //        Instantiate(ReplaceWith, pos, rot);
-            //}
-            //else if (ReactionCooldown > 0)
-            //{
-            //    delayedReaction.TimerCountdown = ReactionCooldown;
-            //    m_CooldownWith.Add(delayedReaction);
-            //}
         }
 
         public bool RequestReaction(ReactOnCollisionPair other, Vector3 position)
